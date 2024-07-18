@@ -686,14 +686,14 @@ simGwexModel <- function(objGwexFit, nb.rep = 10, d.start=as.Date("01011900","%d
     sim.GWex.out <- foreach(iSim=1:nb.rep, .combine='acomb', .multicombine=TRUE) %dopar% {
       # call generating function
       if(typeVar=='Prec'){
-        sim.GWex.1it = sim.GWex.prec.1it(objGwexFit,vecDates,myseed=iSim,objGwexObs=objGwexObs,prob.class=prob.class)
+        sim.GWex.1it = sim.GWex.prec.1it(objGwexFit,vecDates,myseed=iSim*sample(1:50, 1) + lubridate::year(vecDates[1]) + sample(1:100, 1), objGwexObs=objGwexObs,prob.class=prob.class)
       }else if(typeVar=='Temp'){
         if(condPrec){
           matSimPrec = simPrec[,,iSim,drop=F]
         }else{
           matSimPrec = NULL
         }
-        sim.GWex.1it = sim.GWex.temp.1it(objGwexFit,vecDates,myseed=iSim,matSimPrec=matSimPrec)$Tdetrend
+        sim.GWex.1it = sim.GWex.temp.1it(objGwexFit,vecDates,myseed=iSim*sample(1:50, 1) + lubridate::year(vecDates[1]) + sample(1:100, 1),matSimPrec=matSimPrec)$Tdetrend
       }
       return(sim.GWex.1it)
     }
@@ -704,14 +704,14 @@ simGwexModel <- function(objGwexFit, nb.rep = 10, d.start=as.Date("01011900","%d
     sim.GWex.out = array(dim=c(n,p,nb.rep))
     for(iSim in 1:nb.rep){
       if(typeVar=='Prec'){
-        sim.GWex.out[,,iSim] = sim.GWex.prec.1it(objGwexFit,vecDates,myseed=iSim,objGwexObs=objGwexObs,prob.class=prob.class)
+        sim.GWex.out[,,iSim] = sim.GWex.prec.1it(objGwexFit,vecDates,myseed=iSim*sample(1:50, 1) + lubridate::year(vecDates[1]) + sample(1:100, 1),objGwexObs=objGwexObs,prob.class=prob.class)
       }else if(typeVar=='Temp'){
         if(condPrec){
           matSimPrec = simPrec[,,iSim,drop=FALSE]
         }else{
           matSimPrec = NULL
         }
-        sim.GWex.out[,,iSim] = sim.GWex.temp.1it(objGwexFit,vecDates,myseed=iSim,matSimPrec=matSimPrec)$Tdetrend
+        sim.GWex.out[,,iSim] = sim.GWex.temp.1it(objGwexFit,vecDates,myseed=iSim*sample(1:50, 1) + lubridate::year(vecDates[1]) + sample(1:100, 1),matSimPrec=matSimPrec)$Tdetrend
       }
     }
   }
