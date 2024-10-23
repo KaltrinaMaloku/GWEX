@@ -452,7 +452,7 @@ fit.GWex.temp = function(objGwexObs,listOption=NULL){
   # for each month
   for(m in vec.month.char){
     # three month period
-    per.m = get.period.fitting.month(m)
+    per.m = m#get.period.fitting.month(m)
     
     # donnees filtrees
     q.gau.per = q.gau[vec.month%in%per.m,,drop=F]
