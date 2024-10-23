@@ -306,7 +306,7 @@ fit.GWex.temp = function(objGwexObs,listOption=NULL){
     lm.slope = vector(length=n.m)
     for(m in 1:n.m){
       # period for this month
-      per.m = get.period.fitting.month(vec.month.char[m])
+      per.m = m#get.period.fitting.month(vec.month.char[m])
       is.per = vec.month%in%per.m
       # regional mean
       mat.T.per = apply(mat.T[is.per,,drop=F],1,mean,na.rm=T)
@@ -406,7 +406,7 @@ fit.GWex.temp = function(objGwexObs,listOption=NULL){
       # for each month
       for(m in vec.month.char){
         # three month period
-        per.m = get.period.fitting.month(m)
+        per.m = m#get.period.fitting.month(m)
         
         # donnees filtrees
         t.std.per = t.std[vec.month%in%per.m]
